@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { ArrowRight, Globe, Smartphone, Settings, Package, Shield, Sparkles, Lightbulb, Clock, Users, Mail, Linkedin, Twitter, Instagram, Send, Phone } from "lucide-react";
+import { SiX } from "react-icons/si";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { z } from "zod";
+// import { Mail, Linkedin, Instagram, Send } from "lucide-react";
+
 const Index = () => {
   return (
     <div className="min-h-screen">
@@ -307,27 +309,16 @@ const CTA = () => {
                   <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 
-                <Button 
-                  size="lg"
-                  variant="outline"
-                  className="border-white/20 bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm"
-                >
-                  Join Our Journey
-                </Button>
+                
               </div>
 
               <div className="mt-12 grid grid-cols-3 gap-8 max-w-2xl mx-auto pt-12 border-t border-white/10">
-                <div>
-                  <div className="text-3xl font-bold mb-2">100+</div>
-                  <div className="text-sm text-gray-300">Projects Delivered</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold mb-2">50+</div>
-                  <div className="text-sm text-gray-300">Happy Clients</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold mb-2">24/7</div>
-                  <div className="text-sm text-gray-300">Support Available</div>
+                
+                <div className="col-span-3 flex items-center justify-center text-center py-6">
+                  <div>
+                    <div className="text-3xl md:text-4xl font-bold mb-2">24/7</div>
+                    <div className="text-sm text-gray-300">Support Available</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -346,57 +337,51 @@ const Contact = () => {
     email: "",
     message: "",
   });
+  const [loading, setLoading] = useState(false);
 
-  const contactSchema = z.object({
-    name: z.string().trim().nonempty({ message: "Name cannot be empty" }).max(100),
-    email: z.string().trim().email({ message: "Invalid email address" }).max(255),
-    message: z.string().trim().nonempty({ message: "Message cannot be empty" }).max(1000),
-  });
-
+  // ✅ Send message to Flask backend
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const parsed = contactSchema.safeParse(formData);
-    if (!parsed.success) {
-      const firstError = parsed.error.issues[0]?.message ?? "Please check the form and try again.";
-      toast({ title: "Invalid input", description: firstError, variant: "destructive" });
-      return;
-    }
+    setLoading(true);
 
     try {
-      const response = await fetch('https://formsubmit.co/ajax/workwizardsinnovations.official@gmail.com', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          message: formData.message,
-          _subject: `New Contact from ${formData.name}`,
-        }),
+      const response = await fetch("http://localhost:5000/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (result.status === "success") {
         toast({
-          title: "Message Sent Successfully!",
-          description: "We'll get back to you as soon as possible.",
+          title: "✅ Message Sent!",
+          description:
+            "We’ve received your message and sent you a confirmation email.",
         });
         setFormData({ name: "", email: "", message: "" });
       } else {
-        throw new Error('Failed to send message');
+        toast({
+          title: "❌ Failed to send message",
+          description: result.message || "Please try again later.",
+          variant: "destructive",
+        });
       }
     } catch (error) {
+      console.error("Error:", error);
       toast({
-        title: "Error",
-        description: "Failed to send message. Please try again or email us directly.",
+        title: "⚠️ Network Error",
+        description: "Unable to connect to the server.",
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -415,6 +400,7 @@ const Contact = () => {
           </div>
 
           <div className="grid md:grid-cols-2 gap-12">
+            {/* ✅ LEFT SIDE - CONTACT FORM */}
             <form onSubmit={handleSubmit} className="space-y-6 animate-slide-up">
               <div>
                 <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
@@ -463,22 +449,26 @@ const Contact = () => {
                 />
               </div>
 
-              <Button type="submit" size="lg" className="w-full group">
-                Send Message
-                <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              <Button type="submit" size="lg" className="w-full group" disabled={loading}>
+                {loading ? "Sending..." : "Send Message"}
+                {!loading && (
+                  <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                )}
               </Button>
             </form>
 
+            {/* ✅ RIGHT SIDE - SOCIAL LINKS */}
             <div className="space-y-8 animate-slide-up" style={{ animationDelay: "100ms" }}>
               <div className="p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200">
                 <h3 className="text-xl font-semibold mb-4 text-gray-900">Connect With Us</h3>
                 <p className="text-muted-foreground mb-6">
                   Follow us on social media to stay updated with our latest innovations and products.
                 </p>
-                
+
                 <div className="space-y-3">
+                  {/* LinkedIn */}
                   <a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/company/workwizardsinnovations/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
@@ -489,20 +479,22 @@ const Contact = () => {
                     <span className="font-medium text-gray-700">LinkedIn</span>
                   </a>
 
+                  {/* X (Twitter) */}
                   <a
-                    href="https://twitter.com"
+                    href="https://x.com/workwizards26?t=5Af8u4FYdN9bvhDYGGuRlQ&s=09"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
                   >
                     <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
-                      <Twitter className="h-5 w-5 text-white" />
+                      <SiX className="h-5 w-5 text-white" /> {/* ✅ new X icon */}
                     </div>
-                    <span className="font-medium text-gray-700">Twitter</span>
+                    <span className="font-medium text-gray-700">X</span>
                   </a>
 
+                  {/* Instagram */}
                   <a
-                    href="https://instagram.com"
+                    href="https://www.instagram.com/workwizardsinnovations"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
@@ -513,24 +505,17 @@ const Contact = () => {
                     <span className="font-medium text-gray-700">Instagram</span>
                   </a>
 
+                  {/* Email */}
                   <a
-                    href="tel:+919618131779"
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
-                      <Phone className="h-5 w-5 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-700">+91 9618131779</span>
-                  </a>
-
-                  <a
-                    href="mailto:workwizardsinnovations.official@gmail.com"
+                    href="mailto:contact.workwizards@gmail.com"
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
                   >
                     <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
                       <Mail className="h-5 w-5 text-white" />
                     </div>
-                    <span className="font-medium text-gray-700 text-sm">workwizardsinnovations.official@gmail.com</span>
+                    <span className="font-medium text-gray-700">
+                      official@wwi.org.in
+                    </span>
                   </a>
                 </div>
               </div>

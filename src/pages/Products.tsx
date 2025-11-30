@@ -57,7 +57,7 @@ const Products = () => {
           <Button
             variant="ghost"
             onClick={() => navigate("/")}
-            className="mb-8 hover:bg-gray-100 animate-fade-in"
+            className="mb-8 hover:bg-black hover:text-white transition-colors animate-fade-in"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
@@ -198,36 +198,10 @@ const Products = () => {
                 <Card className="p-8 bg-gradient-to-br from-gray-900 to-gray-800 text-white border-gray-700">
                   <h3 className="text-2xl font-bold mb-6 text-center">Launching In</h3>
                   
-                  <div className="grid grid-cols-4 gap-4 mb-8">
-                    {[
-                      { label: "Days", value: timeLeft.days },
-                      { label: "Hours", value: timeLeft.hours },
-                      { label: "Minutes", value: timeLeft.minutes },
-                      { label: "Seconds", value: timeLeft.seconds },
-                    ].map((item, index) => (
-                      <div key={index} className="text-center">
-                        <div className="bg-white/5 rounded-xl p-4 mb-2 border border-white/10">
-                          <div className="text-3xl font-bold text-white">
-                            {String(item.value).padStart(2, '0')}
-                          </div>
-                        </div>
-                        <div className="text-sm text-gray-400">{item.label}</div>
-                      </div>
-                    ))}
+                  <div className="text-center py-12">
+                    <div className="text-sm text-gray-300 uppercase mb-2">Estimated Launch</div>
+                    <div className="text-3xl md:text-4xl font-extrabold text-white">June 2026</div>
                   </div>
-
-                  <Button 
-                    size="lg" 
-                    className="w-full bg-white text-gray-900 hover:bg-gray-100"
-                    onClick={() => {
-                      navigate("/");
-                      setTimeout(() => {
-                        document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-                      }, 100);
-                    }}
-                  >
-                    Get Notified at Launch
-                  </Button>
                 </Card>
               </div>
             </div>

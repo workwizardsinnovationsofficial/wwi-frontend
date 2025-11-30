@@ -50,7 +50,7 @@ const AppDevelopment = () => {
           <Button
             variant="ghost"
             onClick={() => navigate("/")}
-            className="mb-8 hover:bg-gray-100 animate-fade-in"
+            className="mb-8 hover:bg-black hover:text-white transition-colors animate-fade-in"
           >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Home
