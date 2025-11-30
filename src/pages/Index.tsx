@@ -331,64 +331,10 @@ const CTA = () => {
 
 // Contact Section
 const Contact = () => {
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
-  const [loading, setLoading] = useState(false);
-
-  // ✅ Send message to Flask backend
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-
-    try {
-      const response = await fetch("https://wwi-backend-tf6s.onrender.com/send-email", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const result = await response.json();
-
-      if (result.status === "success") {
-        toast({
-          title: "✅ Message Sent!",
-          description:
-            "We’ve received your message and sent you a confirmation email.",
-        });
-        setFormData({ name: "", email: "", message: "" });
-      } else {
-        toast({
-          title: "❌ Failed to send message",
-          description: result.message || "Please try again later.",
-          variant: "destructive",
-        });
-      }
-    } catch (error) {
-      console.error("Error:", error);
-      toast({
-        title: "⚠️ Network Error",
-        description: "Unable to connect to the server.",
-        variant: "destructive",
-      });
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
   return (
     <section id="contact" className="py-24 bg-background">
       <div className="container mx-auto px-6">
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-3xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
               Get In Touch
@@ -399,125 +345,78 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* ✅ LEFT SIDE - CONTACT FORM */}
-            <form onSubmit={handleSubmit} className="space-y-6 animate-slide-up">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2 text-foreground">
-                  Name
-                </label>
-                <Input
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  placeholder="Your name"
-                  required
-                  className="w-full"
-                />
-              </div>
+          <div className="flex justify-center animate-slide-up">
+            <div className="p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200 max-w-md w-full">
+              <h3 className="text-xl font-semibold mb-4 text-gray-900">Connect With Us</h3>
+              <p className="text-muted-foreground mb-6">
+                Follow us on social media to stay updated with our latest innovations and products.
+              </p>
 
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium mb-2 text-foreground">
-                  Email
-                </label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  placeholder="your.email@example.com"
-                  required
-                  className="w-full"
-                />
-              </div>
+              <div className="space-y-3">
+                {/* LinkedIn */}
+                <a
+                  href="https://www.linkedin.com/company/workwizardsinnovations/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
+                >
+                  <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
+                    <Linkedin className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-700">LinkedIn</span>
+                </a>
 
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium mb-2 text-foreground">
-                  Message
-                </label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder="Tell us about your project..."
-                  rows={6}
-                  required
-                  className="w-full resize-none"
-                />
-              </div>
+                {/* X (Twitter) */}
+                <a
+                  href="https://x.com/workwizards26?t=5Af8u4FYdN9bvhDYGGuRlQ&s=09"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
+                >
+                  <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
+                    <SiX className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-700">X</span>
+                </a>
 
-              <Button type="submit" size="lg" className="w-full group" disabled={loading}>
-                {loading ? "Sending..." : "Send Message"}
-                {!loading && (
-                  <Send className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                )}
-              </Button>
-            </form>
+                {/* Instagram */}
+                <a
+                  href="https://www.instagram.com/workwizardsinnovations"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
+                >
+                  <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
+                    <Instagram className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-700">Instagram</span>
+                </a>
 
-            {/* ✅ RIGHT SIDE - SOCIAL LINKS */}
-            <div className="space-y-8 animate-slide-up" style={{ animationDelay: "100ms" }}>
-              <div className="p-8 rounded-2xl bg-gradient-to-br from-gray-50 to-gray-100 border border-gray-200">
-                <h3 className="text-xl font-semibold mb-4 text-gray-900">Connect With Us</h3>
-                <p className="text-muted-foreground mb-6">
-                  Follow us on social media to stay updated with our latest innovations and products.
-                </p>
+                {/* Email */}
+                <a
+                  href="mailto:contact.workwizards@gmail.com"
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
+                >
+                  <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
+                    <Mail className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-700">
+                    official@wwi.org.in
+                  </span>
+                </a>
 
-                <div className="space-y-3">
-                  {/* LinkedIn */}
-                  <a
-                    href="https://www.linkedin.com/company/workwizardsinnovations/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
-                      <Linkedin className="h-5 w-5 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-700">LinkedIn</span>
-                  </a>
-
-                  {/* X (Twitter) */}
-                  <a
-                    href="https://x.com/workwizards26?t=5Af8u4FYdN9bvhDYGGuRlQ&s=09"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
-                      <SiX className="h-5 w-5 text-white" /> {/* ✅ new X icon */}
-                    </div>
-                    <span className="font-medium text-gray-700">X</span>
-                  </a>
-
-                  {/* Instagram */}
-                  <a
-                    href="https://www.instagram.com/workwizardsinnovations"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
-                      <Instagram className="h-5 w-5 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-700">Instagram</span>
-                  </a>
-
-                  {/* Email */}
-                  <a
-                    href="mailto:contact.workwizards@gmail.com"
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
-                  >
-                    <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
-                      <Mail className="h-5 w-5 text-white" />
-                    </div>
-                    <span className="font-medium text-gray-700">
-                      official@wwi.org.in
-                    </span>
-                  </a>
-                </div>
+                {/* Phone */}
+                <a
+                  href="tel:+919618131779"
+                  className="flex items-center gap-3 p-3 rounded-lg hover:bg-white transition-colors group"
+                >
+                  <div className="p-2 rounded-lg bg-gray-900 group-hover:bg-gray-800 transition-colors">
+                    <Phone className="h-5 w-5 text-white" />
+                  </div>
+                  <span className="font-medium text-gray-700">
+                    +91 9618131779
+                  </span>
+                </a>
               </div>
             </div>
           </div>
