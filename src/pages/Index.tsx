@@ -16,6 +16,7 @@ const Index = () => {
       <About />
       <Services />
       <WhyChooseUs />
+      <Partners />
       <CTA />
       <Contact />
       <Footer />
@@ -274,6 +275,38 @@ const WhyChooseUs = () => {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+// Partners Section
+const Partners = () => {
+  return (
+    <section className="py-24 bg-gradient-to-b from-background to-gray-50">
+      <div className="container mx-auto px-6">
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-16 animate-fade-in">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
+              Our Oficial Partner
+            </h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-gray-300 via-gray-600 to-gray-300 mx-auto mb-8"></div>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+              Proud partners with innovative brands to create exceptional digital experiences
+            </p>
+          </div>
+
+          <div className="flex flex-col justify-center items-center animate-slide-up gap-4">
+            <img
+              src="/src/assests/GLOWVAI LOGO.png"
+              alt="GLOWVAI - Branding Partner"
+              className="max-h-40 object-contain hover:scale-105 transition-transform duration-300"
+            />
+            <p className="text-center text-gray-600 font-medium">
+              Our Branding Partner
+            </p>
           </div>
         </div>
       </div>
