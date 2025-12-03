@@ -298,11 +298,12 @@ const Partners = () => {
             </p>
           </div>
 
-          <div className="flex flex-col justify-center items-center animate-slide-up gap-4">
+          <div className="flex flex-col items-center gap-4">
             <img
-              src="/src/assests/glowvai_logo.png"
+              src="/assests/glowvai_logo.png"
               alt="GLOWVAI - Branding Partner"
               className="max-h-40 object-contain hover:scale-105 transition-transform duration-300"
+              loading="lazy"
             />
             <p className="text-center text-gray-600 font-medium">
               Our Branding Partner
