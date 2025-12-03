@@ -300,7 +300,7 @@ const Partners = () => {
 
           <div className="flex flex-col justify-center items-center animate-slide-up gap-4">
             <img
-              src="/src/assests/GLOWVAI LOGO.png"
+              src="/src/assests/glowvai_logo.png"
               alt="GLOWVAI - Branding Partner"
               className="max-h-40 object-contain hover:scale-105 transition-transform duration-300"
             />
