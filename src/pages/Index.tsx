@@ -290,7 +290,7 @@ const Partners = () => {
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16 animate-fade-in">
             <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
-              Our Oficial Partner
+              Our Official Partner
             </h2>
             <div className="w-20 h-1 bg-gradient-to-r from-gray-300 via-gray-600 to-gray-300 mx-auto mb-8"></div>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
