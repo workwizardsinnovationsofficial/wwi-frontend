@@ -4,7 +4,7 @@ import charan from "../assets/charan.jpeg";
 import govind from "../assets/govind.jpeg";
 import prudhvi from "../assets/prudhvi.jpeg";
 import santhosh from "../assets/santhosh.jpeg";
-import venkat from "../assets/venkat.jpeg";
+import venkat from "../assets/venkat.png";
 import viadocsLogo from "../assets/viadoclog.png";
 import knowraLogo from "../assets/knowralog.png";
 import wwi from "../assets/wwi.png";
