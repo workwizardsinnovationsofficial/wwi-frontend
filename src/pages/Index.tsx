@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ArrowRight, Globe, Smartphone, Settings, Package, Shield, Sparkles, Lightbulb, Clock, Users, Mail, Linkedin, Twitter, Instagram, Send, Phone } from "lucide-react";
 import { SiX } from "react-icons/si";
+
+import wwi from "../assets/wwi.png";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -13,7 +15,6 @@ const Index = () => {
   return (
     <div className="min-h-screen">
       <Hero />
-      <About />
       <Services />
       <WhyChooseUs />
       <Partners />
@@ -36,13 +37,18 @@ const Hero = () => {
       
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto text-center animate-fade-in">
-          <div className="mb-6 animate-scale-in">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gray-100 border border-gray-200 mb-8">
-              <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
-              <span className="text-sm font-medium text-gray-700">Next-Gen Digital Solutions</span>
-            </div>
-          </div>
+         
 
+
+          <img
+            src={wwi}
+            alt="WWI Logo"
+            style={{ width:300, height: 300, objectFit: "contain", margin: "0 auto 24px auto" }}
+            className="mx-auto mb-4"
+            draggable="false"
+            onContextMenu={e => e.preventDefault()}
+          />
+          
           <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
             <span className="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-transparent">
               Work Wizards
@@ -461,7 +467,7 @@ const Contact = () => {
 };
 
 // Footer Section
-const Footer = () => {
+export const Footer = () => {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -481,6 +487,14 @@ const Footer = () => {
             <div>
               <h4 className="font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2 text-sm">
+                  <li>
+                    <a 
+                      href="/about"
+                      className="text-gray-400 hover:text-white transition-colors"
+                    >
+                      About
+                    </a>
+                  </li>
                 <li>
                   <button 
                     onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
