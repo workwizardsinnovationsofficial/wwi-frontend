@@ -479,7 +479,7 @@ export const Footer = () => {
           <div className="grid md:grid-cols-3 gap-8 mb-8">
             <div>
               <div className="flex items-center gap-3">
-                <h3 className="text-2xl font-bold mb-4">Work Wizards<br /> Innovations</h3>
+                <h3 className="text-2xl font-bold mb-4">Work Wizards<br />Innovations</h3>
               </div>
               
             </div>

@@ -276,12 +276,13 @@ footer a:hover{
           </div>
           {/* Prudhvi: Image Left, Text Right */}
           <div className="card team ssamr" style={{ display: "flex", alignItems: "center", gap: 32, flexWrap: "nowrap", flexDirection: "row", minHeight: 180, background: '#fafbfc', borderRadius: 18, boxShadow: '0 2px 12px rgba(0,0,0,0.04)', padding: 32, border: '1px solid #eee', width: '100%' }}>
-            <img src={prudhvi} alt="Prudhvi Raj" style={{ width: 200, height: 200, borderRadius: 12, objectFit: 'cover', flexShrink: 0, background: '#fff', border: '2px solid #eaeaea', marginRight: 24 }} draggable="false" onContextMenu={e => e.preventDefault()} />
+            <img src={prudhvi} alt="Duvvu Prudhvi" style={{ width: 200, height: 200, borderRadius: 12, objectFit: 'cover', flexShrink: 0, background: '#fff', border: '2px solid #eaeaea', marginRight: 24 }} draggable="false" onContextMenu={e => e.preventDefault()} />
             <div style={{ flex: 1 }}>
-              <h3 style={{ marginBottom: 8 }}>Prudhvi Raj</h3>
-              <div className="role" style={{ fontWeight: 700, marginBottom: 12 }}>Director, Frontend Engineering</div>
+              <h3 style={{ marginBottom: 8 }}>Duvvu Prudhvi</h3>
+              <div className="role" style={{ fontWeight: 700, marginBottom: 12 }}>Chief Financial Officer (CFO) & Spokesperson</div>
               <p style={{ marginBottom: 0 }}>
-                Prudhvi leads the frontend engineering efforts at WWI, ensuring seamless user experiences, modern UI/UX, and robust client-side architecture for all digital products and platforms.
+               Prudhvi manages financial planning, budgeting, and long-term fiscal sustainability,
+ensuring responsible growth and transparent financial governance.
               </p>
             </div>
           </div>
